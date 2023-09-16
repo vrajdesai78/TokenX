@@ -5,13 +5,17 @@ import Input from "@/components/form-elements/input";
 import Upload from "@/components/form-elements/upload";
 import MCheckbox from "@/components/form-elements/checkbox";
 import Button from "@/components/form-elements/button";
-import { optimismContractAddress, zoraContractAddress, baseContractAddress, modeContractAddress } from "@/utils/constants";
+import {
+  optimismContractAddress,
+  zoraContractAddress,
+  baseContractAddress,
+  modeContractAddress,
+} from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import Image from "next/image";
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
 import { useSnackbarState } from "@/context/snackbar";
-import { SpheronClient, ProtocolEnum } from "@spheron/storage";
 
 const NFTMembership = () => {
   const { setOpen, setMessage } = useSnackbarState();
@@ -28,20 +32,17 @@ const NFTMembership = () => {
   const [contractAddress, setContractAddress] = useState("");
 
   useEffect(() => {
-    console.log(chain?.name)
-    if (chain?.name === 'Optimism Goerli') {
+    console.log(chain?.name);
+    if (chain?.name === "Optimism Goerli") {
       setContractAddress(optimismContractAddress);
-    } 
-    else if (chain?.name === 'Base Goerli') {
+    } else if (chain?.name === "Base Goerli") {
       setContractAddress(baseContractAddress);
-    }
-    else if (chain?.name === 'Zora Goerli Testnet') {
+    } else if (chain?.name === "Zora Goerli Testnet") {
       setContractAddress(zoraContractAddress);
-    }
-    else if (chain?.name === 'Mode Testnet') {
+    } else if (chain?.name === "Mode Testnet") {
       setContractAddress(modeContractAddress);
     }
-  }, [chain])
+  }, [chain]);
 
   const callContract = async (metaDataUrl: string) => {
     const provider = new ethers.providers.Web3Provider(
@@ -74,18 +75,15 @@ const NFTMembership = () => {
       description: description,
       image: imageUrl,
     };
-    const client = new SpheronClient({ token: process.env.NEXT_PUBLIC_SPHERON_TOKEN as string});
-    const { uploadId, bucketId, protocolLink, dynamicLinks, cid } = await client.upload(
-      JSON.stringify(metadata),
-      {
-        protocol: ProtocolEnum.IPFS,
-        name: "metadata.json",
-        onUploadInitiated: (uploadId: string) => {
-          console.log(`Upload initiated with ID ${uploadId}`);
-        }
-      }
-    )
-    console.log(`Upload ID: ${uploadId}`);
+    fetch("/api/upload", {
+      method: "POST",
+      body: JSON.stringify(metadata),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        callContract(`${data.protocolLink}/metadata.json`);
+      });
   };
 
   return (
@@ -126,14 +124,14 @@ const NFTMembership = () => {
               onChange={(e: any) => {
                 const image = URL.createObjectURL(e.target.files[0]);
                 setImage(image);
-                const files = e.target.files;
-                const client = new Web3Storage({
-                  token:
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkxZTRjOEMwNTJiMzkzNEQ3Nzc5NWM3QWQ3MkQ0MTFhMGQyMWUxODIiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzE2ODYwNTU1NjIsIm5hbWUiOiJNYXRpYy1Qcm9maWxlIn0.zDWjIoqZUCnPXtvWXjm_ZbvPN2ZZHTfcK7JHdM2S7hk",
-                });
-                client.put(files).then((cid: any) => {
-                  console.log(cid);
-                  setImageUrl(`https://${cid}.ipfs.w3s.link/${files[0].name}`);
+                const formData = new FormData();
+                formData.append("image", e.target.files[0]);
+                fetch("/api/uploadFile", {
+                  method: "POST",
+                  body: formData,
+                }).then((res: any) => {
+                  const { protocolLink } = res.json();
+                  setImageUrl(`${protocolLink}/TokenX_NFT_Image.png`);
                 });
               }}
             />
