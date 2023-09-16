@@ -134,10 +134,10 @@ const NFTMembership = () => {
                 fetch("/api/uploadFile", {
                   method: "POST",
                   body: formData,
-                }).then((res: any) => {
-                  const { protocolLink } = res.json();
-                  setImageUrl(`${protocolLink}/TokenX_NFT_Image.png`);
+                }).then(async (res: any) => {
+                  const { protocolLink } = await res.json();
                   console.log(protocolLink);
+                  setImageUrl(`${protocolLink}/TokenX_NFT_Image.png`);
                 });
               }}
             />
