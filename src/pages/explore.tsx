@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import NFT from "@/components/nftCard";
 import Layout from "@/components/layout";
 import { useEffect, useState } from "react";
-import { optimismContractAddress, zoraContractAddress, baseContractAddress, modeContractAddress } from "@/utils/constants";
+import { optimismContractAddress, zoraContractAddress, baseContractAddress, polygonMumbaiContractAddress } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
 
@@ -25,8 +25,8 @@ export default function Products() {
     else if (chain?.name === 'Zora Goerli Testnet') {
       setContractAddress(zoraContractAddress);
     }
-    else if (chain?.name === 'Mode Testnet') {
-      setContractAddress(modeContractAddress);
+    else if (chain?.name === 'Polygon Mumbai') {
+      setContractAddress(polygonMumbaiContractAddress);
     }
   }, [chain])
 

@@ -4,8 +4,8 @@ import Upload from "./form-elements/upload";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { useNetwork } from "wagmi";
-import { useSnackbarState } from "@/context/snackbar";
 import { LuExternalLink } from "react-icons/lu";
+import toast from "react-hot-toast";
 
 type AirdropModalProps = {
   open: boolean;
@@ -17,7 +17,6 @@ const AirdropModal = ({ open, onClose, nftAddress }: AirdropModalProps) => {
   const { theme } = useTheme();
   const { push } = useRouter();
   const { chain } = useNetwork();
-  const { setOpen, setMessage } = useSnackbarState();
   const [airdropAddresses, setAirdropAddresses] = useState<string[]>([]);
 
   return (
@@ -99,8 +98,7 @@ const AirdropModal = ({ open, onClose, nftAddress }: AirdropModalProps) => {
               const data = await response.json();
               console.log(data);
               if (data) {
-                setMessage(data.message);
-                setOpen(true);
+                toast.success("Airdrop successful");
               }
             }}
           >

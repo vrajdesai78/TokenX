@@ -9,16 +9,15 @@ import {
   optimismContractAddress,
   zoraContractAddress,
   baseContractAddress,
-  modeContractAddress,
+  polygonMumbaiContractAddress,
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import Image from "next/image";
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
-import { useSnackbarState } from "@/context/snackbar";
+import toast from "react-hot-toast";
 
 const NFTMembership = () => {
-  const { setOpen, setMessage } = useSnackbarState();
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
@@ -39,8 +38,8 @@ const NFTMembership = () => {
       setContractAddress(baseContractAddress);
     } else if (chain?.name === "Zora Goerli Testnet") {
       setContractAddress(zoraContractAddress);
-    } else if (chain?.name === "Mode Testnet") {
-      setContractAddress(modeContractAddress);
+    } else if (chain?.name === "Polygon Mumbai") {
+      setContractAddress(polygonMumbaiContractAddress);
     }
   }, [chain]);
 
@@ -61,8 +60,7 @@ const NFTMembership = () => {
         {
           if (tx) {
             setIsLoading(false);
-            setMessage("NFT created successfully");
-            setOpen(true);
+            toast.success("NFT Created Successfully");
           }
         }
       });

@@ -15,7 +15,7 @@ const airdrop = async (req: NextApiRequest, res: NextApiResponse) => {
       ? "https://goerli.optimism.io"
       : chain === "Base Goerli"
       ? "https://goerli.base.org"
-      : chain === "Zora Goerli Testnet" ? "https://testnet.rpc.zora.energy" : "https://sepolia.mode.network/"
+      : chain === "Zora Goerli Testnet" ? "https://testnet.rpc.zora.energy" : "https://rpc-mumbai.maticvigil.com"
   );
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "", provider);
 

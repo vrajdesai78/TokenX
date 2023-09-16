@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
 import Sidebar from "./sidebar";
 import Navbar from "./navbar";
+// @ts-ignore
 import PropTypes from "prop-types";
+import { Toaster } from "react-hot-toast";
 
 interface ILayout {
   children: ReactNode;
@@ -18,6 +20,7 @@ const Layout = ({ children }: ILayout) => {
             {children}
           </div>
         </div>
+        <Toaster position="bottom-center"/>
       </main>
     </>
   );

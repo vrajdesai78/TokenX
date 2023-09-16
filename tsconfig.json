@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/navbar.tsx", "src/context/snackbar.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/navbar.tsx"],
   "exclude": ["node_modules"]
 }
