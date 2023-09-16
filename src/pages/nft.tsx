@@ -70,14 +70,19 @@ const NFTMembership = () => {
 
   const uploadMetadata = async () => {
     setIsLoading(true);
-    var metadata = {
+    const metadata = {
       name: name,
       description: description,
       image: imageUrl,
     };
     fetch("/api/upload", {
       method: "POST",
-      body: JSON.stringify(metadata),
+      body: JSON.stringify({
+        "content": metadata,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -132,6 +137,7 @@ const NFTMembership = () => {
                 }).then((res: any) => {
                   const { protocolLink } = res.json();
                   setImageUrl(`${protocolLink}/TokenX_NFT_Image.png`);
+                  console.log(protocolLink);
                 });
               }}
             />
