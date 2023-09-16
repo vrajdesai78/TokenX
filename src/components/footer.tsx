@@ -5,7 +5,7 @@ const Footer = () => {
       <div className="mx-auto max-w-[1080px]">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex mt-4 space-x-3 sm:justify-center sm:mt-0">
-            <Image src="/logo.png" width={25} height={20} alt="logo" />
+            <Image src="/tokenX.png" width={25} height={20} alt="logo" />
             <a
               href="https://github.com/neel-ds/TokenX"
               target="_blank"

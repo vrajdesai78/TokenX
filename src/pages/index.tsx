@@ -19,7 +19,7 @@ export default function Home() {
             <div className="flex justify-center flex-row">
               <div className="flex flex-col justify-between text-center h-[100vh] py-10 md:py-32">
                 <Image
-                  src="/logo.png"
+                  src="/tokenX.png"
                   width="150"
                   height="100"
                   className="mx-auto animate__animated animate__zoomIn"
@@ -142,7 +142,7 @@ export default function Home() {
                 <div className="flex space-x-2">
                   <div className="bg-[#39376C] w-[60px] h-[60px] flex items-center justify-center p-[5px] rounded-full">
                     <Image
-                      src="/safe.png"
+                      src="/spheron.png"
                       className="overflow-hidden rounded-full"
                       width="60"
                       height="60"
