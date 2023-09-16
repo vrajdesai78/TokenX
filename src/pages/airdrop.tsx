@@ -170,7 +170,7 @@ export default function Airdrop() {
           </div>
           <div className="flex w-[100%] bg-[#1e1e1e] drop-shadow-lg text-gray-300 md:max-w-[600px] mx-auto p-5 mt-2 justify-center border border-gray-600 rounded-xl">
             {`curl  -X POST \
-  'https://TokenX-op.vercel.app/api/airdrop' \
+  'https://token-x-api.vercel.app/api/airdrop' \
   --header 'Accept: */*' \
   --header 'Content-Type: application/json' \
   --data-raw '{
@@ -190,7 +190,7 @@ export default function Airdrop() {
         <Button
           label="Try It"
           onClick={async () => {
-            const response = await fetch("/api/airdrop", {
+            const response = await fetch("https://token-x-api.vercel.app/api/airdrop", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

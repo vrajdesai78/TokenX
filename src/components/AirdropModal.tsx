@@ -84,7 +84,7 @@ const AirdropModal = ({ open, onClose, nftAddress }: AirdropModalProps) => {
           <Button
             className="text-white rounded-lg bg-gradient-to-r from-[#f9b92a] to-[#dc9519]"
             onClick={async () => {
-              const response = await fetch("/api/airdrop", {
+              const response = await fetch("https://token-x-api.vercel.app/api/airdrop", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
