@@ -73,7 +73,7 @@ const NFTMembership = () => {
       description: description,
       image: imageUrl,
     };
-    fetch("https://token-x-api.vercel.app/api/upload", {
+    fetch("http://ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/upload", {
       method: "POST",
       body: JSON.stringify({
         "content": metadata,
@@ -129,7 +129,7 @@ const NFTMembership = () => {
                 setImage(image);
                 const formData = new FormData();
                 formData.append("image", e.target.files[0]);
-                fetch("https://token-x-api.vercel.app/api/uploadFile", {
+                fetch("http://ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/uploadFile", {
                   method: "POST",
                   body: formData,
                 }).then(async (res: any) => {
