@@ -190,7 +190,7 @@ export default function Airdrop() {
         <Button
           label="Try It"
           onClick={async () => {
-            const response = await fetch("http://ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/airdrop", {
+            const response = await fetch("https://cors-anywhere.herokuapp.com/ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/airdrop", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
