@@ -79,7 +79,7 @@ export default function Airdrop() {
     { name: "Optimism", value: "Optimism Goerli" },
     { name: "Base", value: "Base Goerli" },
     { name: "Zora", value: "Zora Goerli Testnet" },
-    { name: "Mode", value: "Mode Testnet"}
+    { name: "Polygon", value: "Polygon Mumbai" }
   ];
   return (
     <Layout>
