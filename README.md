@@ -3,7 +3,7 @@ It provides an interactive no-code platform that allows users to create a commun
 
 ## Prerequisites
 
-Every user must have Metamask wallet to interact with this product. Checkout how to create Metamask wallet from [here](https://polygon.technology/blog/getting-started-with-metamask-on-polygon). To use this lauchpad, feel free to add our compatible networks: [Scroll](https://guide.scroll.io/user-guide/setup), [Optimisim](https://help.optimism.io/hc/en-us/articles/6223777057179-How-do-I-use-Optimism-with-MetaMask-), [Polygon zkEVM](https://polygon.technology/blog/your-three-step-guide-to-using-polygon-zkevm-yes-its-that-easy), [Mantle](https://mirror.xyz/0xmantle.eth/qIDSO3AsFnXmwVLSYfODZWOpK_0K01UdvR3ZxUCtCjw)
+Every user must have Metamask wallet to interact with this product. Checkout how to create Metamask wallet from [here](https://polygon.technology/blog/getting-started-with-metamask-on-polygon). 
 
 Follow the instructions for the local environment: The user must have Node.js and npm to run this platform. Just download Node.js from [here](https://nodejs.org/en/download/).
 
