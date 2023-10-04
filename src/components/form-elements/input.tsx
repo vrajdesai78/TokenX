@@ -31,10 +31,10 @@ const CssTextField = styled(TextField)<CssTextFieldProps>(({ theme }) => ({
       borderColor: theme === "light" ? "#4f4f4f" : "#dedede",
     },
     "&:hover fieldset": {
-      borderColor: "#c45cfc",
+      borderColor: "#9FF3FF",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#c45cfc",
+      borderColor: "#9FF3FF",
     },
   },
 }));

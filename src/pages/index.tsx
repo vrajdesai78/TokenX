@@ -168,11 +168,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="bg-[url('/arch.png')] bg-no-repeat bg-cover bg-center bg-fixed">
+        <div className="bg-[url('/chess.png')] bg-top bg-cover bg-fixed">
           <div className="px-4 lg:px-0 mx-auto max-w-[1080px] flex justify-center flex-col min-h-[70vh]">
             <div className="flex justify-center flex-row">
               <div className="flex flex-col justify-center text-center h-[70vh] py-32 lg:px-32 space-y-20">
-                <h2 className="text-4xl font-medium text-[#DBE6EB] sm:text-5xl">
+                <h2 className="text-4xl font-semibold text-white sm:text-5xl">
                   Grow Your Community <br /> Today With Us
                 </h2>
                 <GradientButton link="/dashboard" title="Let's go 🚀" />

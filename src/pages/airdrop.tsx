@@ -12,7 +12,6 @@ import {
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
-import { useEffectOnce } from "usehooks-ts";
 
 interface Nftdetails {
   creator: string;
@@ -33,8 +32,6 @@ export default function Airdrop() {
   const { chain } = useNetwork();
   const [contractAddress, setContractAddress] = useState("");
   const [responseData, setResponseData] = useState({});
-
- 
 
   const { data, isError, isLoading } = useContractRead({
     address: xdcTestContractAddress as `0x${string}`,
@@ -149,7 +146,7 @@ export default function Airdrop() {
             <p className="flex w-[100px] font-semibold"></p>
             <div className="text-sm text-[#858585]">
               Follow this json format for addresses{" "}
-              <a href="" className="text-[#a13bf7]">
+              <a href="" className="text-[#3cb6c8] dark:text-[#9FF3FF]">
                 here
               </a>
             </div>

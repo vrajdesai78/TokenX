@@ -17,9 +17,9 @@ type ThemeProps = {
 }
 
 const CheckIcon = styled(Checkbox)<ThemeProps>(({ theme }) => ({
-    color: theme === 'light' ? "#4f4f4f" : "#c45cfc",
+    color: theme === 'light' ? "#4f4f4f" : "#9FF3FF",
     '& .MuiSvgIcon-root': {
-        color: theme === 'light' ? "#4f4f4f" : "#c45cfc"
+        color: theme === 'light' ? "#4f4f4f" : "#9FF3FF"
     },
   }));
 

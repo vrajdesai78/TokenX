@@ -58,7 +58,7 @@ const Sidebar = () => {
       <div className="px-3 justify-start items-center">
         <Link href="/" className="flex justify-start items-center mt-2 mb-8">
           <Image
-            src="/tokenX.png"
+            src="/tokenXDC.png"
             width="30"
             height="30"
             alt="TokenX"

@@ -13,7 +13,7 @@ const Button = ({ label, onClick, disabled }: IButton) => {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`w-[100px] mx-auto text-[#ffffff] items-center justify-center ${disabled ? "bg-violet-200" : "bg-violet-500"} hover:bg-violet-600 focus:ring-1 focus:outline-none focus:ring-[#cfcfcf] font-medium rounded-xl text-sm px-5 py-2.5 text-center shadow-none dark:bg-violet-500 dark:hover:bg-violet-600 dark:text-gray-100 hover:drop-shadow-xl`}
+      className={`w-[100px] mx-auto text-[#9FF3FF] dark:text-[#131619] hover:bg-black items-center justify-center ${disabled ? "dark:bg-[#abf3fe]" : "dark:bg-[#9FF3FF]"} ${disabled ? "bg-[#333334]" : "bg-[#131619]"} dark:hover:bg-[#95e5f2] focus:ring-1 focus:outline-none focus:ring-[#cfcfcf] font-medium rounded-xl text-sm px-5 py-2.5 text-center shadow-none drop-shadow-xl`}
     >
       {label}
     </button>
