@@ -8,10 +8,7 @@ import MCheckbox from "@/components/form-elements/checkbox";
 import { useState, useEffect } from "react";
 import { FiCopy } from "react-icons/fi";
 import {
-  optimismContractAddress,
-  zoraContractAddress,
-  baseContractAddress,
-  polygonMumbaiContractAddress,
+  xdcTestContractAddress
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
@@ -37,21 +34,10 @@ export default function Airdrop() {
   const [contractAddress, setContractAddress] = useState("");
   const [responseData, setResponseData] = useState({});
 
-  useEffect(() => {
-    console.log(chain?.name);
-    if (chain?.name === "Optimism Goerli") {
-      setContractAddress(optimismContractAddress);
-    } else if (chain?.name === "Base Goerli") {
-      setContractAddress(baseContractAddress);
-    } else if (chain?.name === "Zora Goerli Testnet") {
-      setContractAddress(zoraContractAddress);
-    } else if (chain?.name === "Polygon Mumbai") {
-      setContractAddress(polygonMumbaiContractAddress);
-    }
-  }, [chain]);
+ 
 
   const { data, isError, isLoading } = useContractRead({
-    address: contractAddress as `0x${string}`,
+    address: xdcTestContractAddress as `0x${string}`,
     abi: NFTContractFactory,
     functionName: "getNFTsWithMetadataCreatedByCreator",
     args: [address],
@@ -190,7 +176,7 @@ export default function Airdrop() {
         <Button
           label="Try It"
           onClick={async () => {
-            const response = await fetch("https://cors-anywhere.herokuapp.com/ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/airdrop", {
+            const response = await fetch("/api/airdrop", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

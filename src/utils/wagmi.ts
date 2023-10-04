@@ -1,8 +1,8 @@
 import { configureChains, createConfig } from "wagmi";
-import { optimismGoerli, baseGoerli, zoraTestnet, polygonMumbai } from "wagmi/chains";
+import { xdc, xdcTestnet } from "wagmi/chains";
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 
-const supportedChains = [polygonMumbai, optimismGoerli, baseGoerli, zoraTestnet];
+const supportedChains = [xdcTestnet];
 
 const { publicClient } = configureChains(
     // @ts-ignore
