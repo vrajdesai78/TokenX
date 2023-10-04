@@ -6,10 +6,7 @@ import Upload from "@/components/form-elements/upload";
 import MCheckbox from "@/components/form-elements/checkbox";
 import Button from "@/components/form-elements/button";
 import {
-  optimismContractAddress,
-  zoraContractAddress,
-  baseContractAddress,
-  polygonMumbaiContractAddress,
+ xdcTestContractAddress
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import Image from "next/image";
@@ -30,18 +27,6 @@ const NFTMembership = () => {
   const { chain } = useNetwork();
   const [contractAddress, setContractAddress] = useState("");
 
-  useEffect(() => {
-    console.log(chain?.name);
-    if (chain?.name === "Optimism Goerli") {
-      setContractAddress(optimismContractAddress);
-    } else if (chain?.name === "Base Goerli") {
-      setContractAddress(baseContractAddress);
-    } else if (chain?.name === "Zora Goerli Testnet") {
-      setContractAddress(zoraContractAddress);
-    } else if (chain?.name === "Polygon Mumbai") {
-      setContractAddress(polygonMumbaiContractAddress);
-    }
-  }, [chain]);
 
   const callContract = async (metaDataUrl: string) => {
     const provider = new ethers.providers.Web3Provider(
@@ -50,7 +35,7 @@ const NFTMembership = () => {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      contractAddress as `0x${string}`,
+      xdcTestContractAddress as `0x${string}`,
       NFTContractFactory,
       signer
     );
@@ -73,7 +58,7 @@ const NFTMembership = () => {
       description: description,
       image: imageUrl,
     };
-    fetch("https://cors-anywhere.herokuapp.com/ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/upload", {
+    fetch("/api/upload", {
       method: "POST",
       body: JSON.stringify({
         "content": metadata,
@@ -129,7 +114,7 @@ const NFTMembership = () => {
                 setImage(image);
                 const formData = new FormData();
                 formData.append("image", e.target.files[0]);
-                fetch("https://cors-anywhere.herokuapp.com/ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/uploadFile", {
+                fetch("/api/uploadFile", {
                   method: "POST",
                   body: formData,
                 }).then(async (res: any) => {

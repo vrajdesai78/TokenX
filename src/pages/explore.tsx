@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import NFT from "@/components/nftCard";
 import Layout from "@/components/layout";
 import { useEffect, useState } from "react";
-import { optimismContractAddress, zoraContractAddress, baseContractAddress, polygonMumbaiContractAddress } from "@/utils/constants";
+import { xdcTestContractAddress} from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
 
@@ -12,26 +12,11 @@ export default function Products() {
   const { address } = useAccount();
 
   const { chain } = useNetwork();
-  const [contractAddress, setContractAddress] = useState("");
 
-  useEffect(() => {
-    console.log(chain?.name)
-    if (chain?.name === 'Optimism Goerli') {
-      setContractAddress(optimismContractAddress);
-    } 
-    else if (chain?.name === 'Base Goerli') {
-      setContractAddress(baseContractAddress);
-    }
-    else if (chain?.name === 'Zora Goerli Testnet') {
-      setContractAddress(zoraContractAddress);
-    }
-    else if (chain?.name === 'Polygon Mumbai') {
-      setContractAddress(polygonMumbaiContractAddress);
-    }
-  }, [chain])
+  
 
   const { data, isError, isLoading } = useContractRead({
-    address: contractAddress as `0x${string}`,
+    address: xdcTestContractAddress as `0x${string}`,
     abi: NFTContractFactory,
     functionName: "getNFTsWithMetadataCreatedByCreator",
     args: [address],
