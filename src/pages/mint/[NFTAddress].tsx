@@ -11,24 +11,33 @@ import {
 } from "wagmi";
 import NFTContract from "@/utils/ABI/NFTContract.json";
 import toast from "react-hot-toast";
+import { Button as Btn } from "@mui/material";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 const MintNFT = () => {
   const { theme } = useTheme();
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("0");
+  const [price, setPrice] = useState(BigInt(0));
+  const [isLoading, setIsLoading] = useState(false);
 
   const { query } = useRouter();
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data: uriData } = useContractRead({
     address: query.NFTAddress as `0x${string}`,
     abi: NFTContract,
     functionName: "uri",
     args: [0],
-    onSuccess: (data) => {
-      console.log("Succes");
+    onError: (error) => {
+      console.log("Error", error);
     },
+  });
+
+  const { data: nftPrice } = useContractRead({
+    address: query.NFTAddress as `0x${string}`,
+    abi: NFTContract,
+    functionName: "nftPrice",
     onError: (error) => {
       console.log("Error", error);
     },
@@ -38,42 +47,35 @@ const MintNFT = () => {
     address: query.NFTAddress as `0x${string}`,
     abi: NFTContract,
     functionName: "nftMint",
+    value: nftPrice ? BigInt(nftPrice as any) : BigInt(0),
   });
 
-  const { write, error, isSuccess } = useContractWrite(config);
+  const { writeAsync, error, isSuccess } = useContractWrite(config);
 
   useEffect(() => {
     if (isSuccess) {
+      setIsLoading(false);
       toast.success("NFT Minted Successfully");
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-    if (error) {
-      console.log(error);
-    }
-  }, [data, error]);
-
   const getNftdata = async () => {
-    fetch(data as string)
+    fetch(uriData as string)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setImage(data.image);
         setName(data.name);
         setDescription(data.description);
-        setPrice(price);
+        setPrice(data);
       });
   };
 
   useEffect(() => {
-    if (data) {
+    if (uriData) {
       getNftdata();
     }
-  }, [query, data]);
+  }, [query, uriData]);
 
   return (
     <Layout>
@@ -126,14 +128,19 @@ const MintNFT = () => {
             </Typography>
             <Typography className="text-lg">{description}</Typography>
             <Stack direction={"row"} alignItems={"center"}>
-              <Button
+              <Btn
                 className="px-5 py-2 bg-[#c3a6ff90] hover:bg-[#b691ff90] mt-3 text-gray-700 rounded-3xl drop-shadow-md dark:bg-[#d1baff] dark:hover:bg-[#cab0ff]"
-                onClick={() => {
-                  write?.();
+                onClick={async () => {
+                  setIsLoading(true);
+                  try { await writeAsync?.();} catch (error) {
+                    setIsLoading(false);
+                    toast.error("Error while minting NFT");
+                  }
                 }}
+                startIcon={isLoading ? <CircularProgress size='sm' /> : null}
               >
                 Mint
-              </Button>
+              </Btn>
             </Stack>
           </Stack>
         </Box>

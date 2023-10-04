@@ -8,7 +8,7 @@ import MCheckbox from "@/components/form-elements/checkbox";
 import { useState, useEffect } from "react";
 import { FiCopy } from "react-icons/fi";
 import {
-  xdcTestContractAddress
+  xdcMainnetContractAddress
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
@@ -34,7 +34,7 @@ export default function Airdrop() {
   const [responseData, setResponseData] = useState({});
 
   const { data, isError, isLoading } = useContractRead({
-    address: xdcTestContractAddress as `0x${string}`,
+    address: xdcMainnetContractAddress as `0x${string}`,
     abi: NFTContractFactory,
     functionName: "getNFTsWithMetadataCreatedByCreator",
     args: [address],

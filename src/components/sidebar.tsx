@@ -43,7 +43,7 @@ const navSec2 = [
   {
     link: "/nft",
     icon: <RiNftFill size={24} />,
-    name: "ERC 721",
+    name: "XRC1155",
   },
   {
     link: "/airdrop",

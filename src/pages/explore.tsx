@@ -3,20 +3,17 @@ import Grid from "@mui/material/Grid";
 import NFT from "@/components/nftCard";
 import Layout from "@/components/layout";
 import { useEffect, useState } from "react";
-import { xdcTestContractAddress} from "@/utils/constants";
+import { xdcMainnetContractAddress} from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
+import { utils } from "ethers";
 
 export default function Products() {
   const [productData, setProductData] = useState([{}]);
   const { address } = useAccount();
 
-  const { chain } = useNetwork();
-
-  
-
   const { data, isError, isLoading } = useContractRead({
-    address: xdcTestContractAddress as `0x${string}`,
+    address: xdcMainnetContractAddress as `0x${string}`,
     abi: NFTContractFactory,
     functionName: "getNFTsWithMetadataCreatedByCreator",
     args: [address],
@@ -37,7 +34,7 @@ export default function Products() {
         name: pd.name,
         description: pd.description,
         image: pd.image,
-        price: parseFloat(nft.nftPrice),
+        price: utils.formatEther(nft.nftPrice),
         nftAddress: nft.nftAddress,
       });
     }

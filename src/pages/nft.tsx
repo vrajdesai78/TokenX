@@ -5,12 +5,14 @@ import Input from "@/components/form-elements/input";
 import Upload from "@/components/form-elements/upload";
 import MCheckbox from "@/components/form-elements/checkbox";
 import Button from "@/components/form-elements/button";
+import CircularProgress from '@mui/joy/CircularProgress';
+import { Button as Btn } from "@mui/material";
 import {
- xdcTestContractAddress
+ xdcMainnetContractAddress
 } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import Image from "next/image";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
 
@@ -24,9 +26,6 @@ const NFTMembership = () => {
   const [price, setPrice] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { address } = useAccount();
-  const { chain } = useNetwork();
-  const [contractAddress, setContractAddress] = useState("");
-
 
   const callContract = async (metaDataUrl: string) => {
     const provider = new ethers.providers.Web3Provider(
@@ -35,12 +34,12 @@ const NFTMembership = () => {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      xdcTestContractAddress as `0x${string}`,
+      xdcMainnetContractAddress as `0x${string}`,
       NFTContractFactory,
       signer
     );
     contract
-      .createNFT(metaDataUrl, supply, isSupply, price, address)
+      .createNFT(metaDataUrl, supply, isSupply, ethers.utils.parseEther(price), address)
       .then(async (tx: string) => {
         {
           if (tx) {
@@ -179,14 +178,21 @@ const NFTMembership = () => {
             }
             helper="Recommend initial NFT Price - 0.01 ETH, No 'ETH' Symbol Required."
           />
-          <Button
-            label="Create"
+          <Btn
             onClick={async (e: any) => {
               e.preventDefault();
+              if (name === "" || description === "" || imageUrl === "" || price === "") {
+                toast.error("Please fill all required fields");
+                return;
+              }
               await uploadMetadata();
             }}
+            className={`mx-auto text-[#9FF3FF] dark:text-[#131619] hover:bg-black items-center justify-center ${isLoading ? "dark:bg-[#abf3fe]" : "dark:bg-[#9FF3FF]"} ${isLoading ? "bg-[#333334]" : "bg-[#131619]"} dark:hover:bg-[#95e5f2] focus:ring-1 focus:outline-none focus:ring-[#cfcfcf] font-medium rounded-xl text-sm px-5 py-2.5 text-center shadow-none drop-shadow-xl"}`}
+            startIcon={isLoading ? <CircularProgress size="sm"/> : null}
             disabled={isLoading}
-          />
+          >
+            Create NFT
+          </Btn>
         </form>
       </div>
     </Layout>
