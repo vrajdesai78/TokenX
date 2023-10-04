@@ -54,8 +54,8 @@ const Dashboard = () => {
       </Head>
       <div className="flex flex-col w-full pl-[80px] lg:pl-0 pb-10 md:pr-5">
         <div className="flex space-x-2 items-center mb-10 justify-center md:justify-start">
-          <MdSpaceDashboard size={20} />
-          <h1 className="text-[#1e1e1e] font-semibold text-xl dark:text-[#cccae3]">
+          <MdSpaceDashboard size={20} className="dark:text-[#9FF3FF]" />
+          <h1 className="text-[#1e1e1e] font-semibold text-xl dark:text-[#9FF3FF]">
             DASHBOARD
           </h1>
         </div>
@@ -65,8 +65,8 @@ const Dashboard = () => {
             link="/nft"
             title="NFT COLLECTION"
             img="/NFT.png"
-            style="text-[#E4E4ED]"
-            color="bg-gradient-to-r from-[#c45cfc] to-[#7b4fc9]"
+            style="text-[#131619]"
+            color="bg-gradient-to-r from-[#FFDC9A] to-[#FFBFAB]"
           />
           <Card
             heading="SHIP ERC721A TO ATTENDEES"
@@ -74,7 +74,7 @@ const Dashboard = () => {
             title="AIRDROP NFTs"
             img="/airdrop.png"
             style="text-gray-700"
-            color="bg-gradient-to-r from-[#ebcef2] to-[#f9b92a]"
+            color="bg-gradient-to-r from-[#9FF3FF] to-[#FFE5E8]"
           />
         </div>
       </div>

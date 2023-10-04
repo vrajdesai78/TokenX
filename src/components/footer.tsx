@@ -9,13 +9,13 @@ const Footer = () => {
             <a
               href="https://github.com/neel-ds/TokenX"
               target="_blank"
-              className="text-[#E4E4ED] hover:text-[#a1a1a1] dark:text-[#605e8a]"
+              className="text-[#E8F0F3] hover:text-[#DBE6EB]"
               rel="noreferrer"
             >
               GitHub
             </a>
           </div>
-          <span className="text-md text-[#E4E4ED] hover:text-[#a1a1a1] sm:text-center dark:text-[#605e8a]">
+          <span className="text-md text-[#DBE6EB] sm:text-center">
             © {new Date().getFullYear()}{" "}
             <a href="" className="hover:underline">
               TokenX

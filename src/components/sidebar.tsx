@@ -64,7 +64,7 @@ const Sidebar = () => {
             alt="TokenX"
             className="mr-3"
           />
-          <span className="hidden md:flex font-bold text-xl">TokenX</span>
+          <span className="hidden md:flex font-bold text-xl dark:text-[#F8FBFC]">TokenX</span>
         </Link>
         <ul className="flex flex-col items-center justify-center w-full">
           {navSec1.map((item) => (

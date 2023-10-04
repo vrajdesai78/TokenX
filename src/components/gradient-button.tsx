@@ -10,7 +10,7 @@ const GradientButton = ({ title, link }: GradientButtonProps) => {
     <div>
       <Link
         href={link}
-        className="px-10 py-3 border-0 border-transparent text-white font-medium rounded-full text-gray-700 bg-gradient-to-r from-[#8b3fe8] to-[#dc9519] hover:drop-shadow-[0_3px_5px_#7d7d7d] md:py-4 md:text-lg"
+        className="px-10 py-3 border-0 border-transparent text-[#131619] font-medium rounded-full bg-gradient-to-r from-[#9FF3FF] to-[#FFDC9A] hover:drop-shadow-[0_3px_5px_#7d7d7d] md:py-4 md:text-lg"
       >
         {title}
       </Link>
