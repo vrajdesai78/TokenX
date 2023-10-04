@@ -1,5 +1,5 @@
 # TokenX
-It provides an interactive no-code platform that allows users to create a community token and NFT memberships on multichains. TokenX empowers creators to build thriving web3 communities on multiple chains including Scroll, Mantle, Polygon zkEVM and Optimism. We desire to provide a launchpad that simplifies community, monetization, and growth. It also provides developer tool to send NFTs in batches just by providing recipient list. This is powerful and deployed on Spheron. 
+It provides an interactive no-code platform that allows users to create a community token and NFT memberships on XDC network. TokenX empowers creators to build thriving web3 communities on XDC network. We desire to provide a launchpad that simplifies community, monetization, and growth. It also provides developer tool to send NFTs in batches just by providing recipient list. This is powerful and enhance community reward mechanism. 
 
 ## Prerequisites
 
