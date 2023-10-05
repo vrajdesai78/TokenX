@@ -15,7 +15,7 @@ const upload = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const client = new SpheronClient({
-    token: process.env.NEXT_PUBLIC_SPHERON_TOKEN as string,
+    token: process.env.SPHERON_TOKEN as string,
   });
 
   const { protocolLink } = await client.upload(tempPath, {

@@ -28,7 +28,7 @@ const uploadFile = async (req: NextApiRequest, res: NextApiResponse) => {
     fs.copyFileSync(image[0].filepath, tempPath);
 
     const client = new SpheronClient({
-      token: process.env.NEXT_PUBLIC_SPHERON_TOKEN as string,
+      token: process.env.SPHERON_TOKEN as string,
     });
 
     const { protocolLink } = await client.upload(tempPath, {

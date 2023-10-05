@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "@/components/layout";
 import Image from "next/image";
 import Link from "next/link";
 import { MdSpaceDashboard } from "react-icons/md";
 import Table from "@/components/table";
+import { useAccount, useContractRead } from "wagmi";
+import { xdcMainnetContractAddress } from "@/utils/constants";
+import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 
 type CardProps = {
   heading: string;
@@ -15,12 +18,7 @@ type CardProps = {
   style: string;
 };
 
-const headers = [
-  "Name",
-  "Total Mints",
-  "Reward Amount (in XDC)",
-  "",
-];
+const headers = ["Name", "Total Mints", "Reward Amount (in XDC)", ""];
 
 const Card = ({ heading, title, img, link, color, style }: CardProps) => {
   return (
@@ -52,7 +50,38 @@ const Card = ({ heading, title, img, link, color, style }: CardProps) => {
 };
 
 const Dashboard = () => {
-  const [productData, setProductData] = useState([{}]);
+  const [NFTAddresses, setNFTAddresses] = useState<string[]>([]);
+
+  const { address } = useAccount();
+
+  const { data, isError, isLoading } = useContractRead({
+    address: xdcMainnetContractAddress as `0x${string}`,
+    abi: NFTContractFactory,
+    functionName: "getNFTsWithMetadataCreatedByCreator",
+    args: [address],
+    onSuccess: (data) => {
+      console.log("Succes");
+    },
+    onError: (error) => {
+      console.log("Error", error);
+    },
+  });
+
+  const fetchData = async () => {
+    let nfts = [];
+    for (let nft of data as any) {
+      nfts.push(nft.nftAddress);
+      console.log(nft.nftAddress);
+    }
+    setNFTAddresses(nfts);
+  };
+
+  useEffect(() => {
+    if (data) {
+      fetchData();
+    }
+  }, [data]);
+
   return (
     <Layout>
       <Head>
@@ -87,8 +116,25 @@ const Dashboard = () => {
           />
         </div>
         <div className="mt-12">
-        <Table headers={headers} data={productData} />
-      </div>
+          <table className="min-w-full divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                {headers.map((header, index) => (
+                  <th
+                    key={index}
+                    scope="col"
+                    className="capitalize px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            {NFTAddresses.map((nftAddress, index) => (
+              <Table key={index} headers={headers} NFTAddress={nftAddress} />
+            ))}
+          </table>
+        </div>
       </div>
     </Layout>
   );
