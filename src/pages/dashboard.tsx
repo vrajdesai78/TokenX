@@ -1,9 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Layout from "@/components/layout";
 import Image from "next/image";
 import Link from "next/link";
 import { MdSpaceDashboard } from "react-icons/md";
+import Table from "@/components/table";
 
 type CardProps = {
   heading: string;
@@ -13,6 +14,13 @@ type CardProps = {
   color: string;
   style: string;
 };
+
+const headers = [
+  "Name",
+  "Total Mints",
+  "Reward Amount (in XDC)",
+  "",
+];
 
 const Card = ({ heading, title, img, link, color, style }: CardProps) => {
   return (
@@ -44,6 +52,7 @@ const Card = ({ heading, title, img, link, color, style }: CardProps) => {
 };
 
 const Dashboard = () => {
+  const [productData, setProductData] = useState([{}]);
   return (
     <Layout>
       <Head>
@@ -77,6 +86,9 @@ const Dashboard = () => {
             color="bg-gradient-to-r from-[#9FF3FF] to-[#FFE5E8]"
           />
         </div>
+        <div className="mt-12">
+        <Table headers={headers} data={productData} />
+      </div>
       </div>
     </Layout>
   );
