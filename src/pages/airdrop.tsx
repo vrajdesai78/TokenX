@@ -44,7 +44,7 @@ export default function Airdrop() {
       const json = await response.json();
       nfts.push({
         name: json.name,
-        address: nft.nftAddress,
+        value: nft.nftAddress,
       });
     }
     setNftAddresses(nfts);
