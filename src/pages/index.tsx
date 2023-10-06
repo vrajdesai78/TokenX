@@ -30,14 +30,13 @@ export default function Home() {
                 </h1>
                 <div className="text-4xl tracking-tight font-extrabold text-[#FFE5E8] mt-[2rem] sm:text-5xl md:text-6xl lg:px-4 space-y-5">
                   <h2 className="animate__animated animate__slideInRight">
-                    Simplify Event Rewards
+                    Supercharge Community
                   </h2>
                   <h2 className="animate__animated animate__slideInLeft">
-                    Community & Growth
+                    Growth & Engagement
                   </h2>
                   <h3 className="block text-[#DBE6EB] font-medium text-2xl lg:px-32 animate__animated animate__slideInRight">
-                    Leading communities trust our no-code tools for POA and NFT
-                    memberships
+                    Leading protocols trust our no-code tools for airdrop and XRC1155
                   </h3>
                 </div>
                 <div className="animate__animated animate__pulse mt-10">
@@ -55,8 +54,7 @@ export default function Home() {
                   Empower your Community <br /> with Superpowers
                 </h2>
                 <h3 className="text-[#A098D5] leading-relaxed font-medium text-2xl lg:px-32">
-                  Leading communities trust our no-code tools for POA and NFT
-                  memberships
+                  Share claimable link to whitelisted address and track your mint counts on dashboard
                 </h3>
               </AnimationOnScroll>
             </div>
