@@ -7,9 +7,7 @@ import Button from "@/components/form-elements/button";
 import MCheckbox from "@/components/form-elements/checkbox";
 import { useState, useEffect } from "react";
 import { FiCopy } from "react-icons/fi";
-import {
-  xdcMainnetContractAddress
-} from "@/utils/constants";
+import { xdcMainnetContractAddress } from "@/utils/constants";
 import NFTContractFactory from "@/utils/ABI/NFTContractFactory.json";
 import { useAccount, useContractRead, useNetwork } from "wagmi";
 
@@ -30,10 +28,9 @@ export default function Airdrop() {
   const [nftAddresses, setNftAddresses] = useState([{}]);
   const [nftAddress, setNftAddress] = useState("");
   const { chain } = useNetwork();
-  const [contractAddress, setContractAddress] = useState("");
   const [responseData, setResponseData] = useState({});
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data } = useContractRead({
     address: xdcMainnetContractAddress as `0x${string}`,
     abi: NFTContractFactory,
     functionName: "getNFTsWithMetadataCreatedByCreator",
@@ -41,14 +38,16 @@ export default function Airdrop() {
   });
 
   const fetchData = async () => {
-    Object.values(data as Nftdetails).forEach(async ({ nftAddress, uri }) => {
-      const response = await fetch(uri);
-      const nftDetails = await response.json();
-        setNftAddresses((nftAddresses) => [
-          ...nftAddresses,
-          { name: nftDetails.name, value: nftAddress },
-        ]);
-    });
+    let nfts = [{}];
+    for (let nft of data as any) {
+      const response = await fetch(nft.uri);
+      const json = await response.json();
+      nfts.push({
+        name: json.name,
+        address: nft.nftAddress,
+      });
+    }
+    setNftAddresses(nfts);
   };
 
   useEffect(() => {
@@ -58,12 +57,6 @@ export default function Airdrop() {
     }
   }, [data]);
 
-  const serviceOptions = [
-    { name: "Optimism", value: "Optimism Goerli" },
-    { name: "Base", value: "Base Goerli" },
-    { name: "Zora", value: "Zora Goerli Testnet" },
-    { name: "Polygon", value: "Polygon Mumbai" }
-  ];
   return (
     <Layout>
       <Head>
@@ -112,19 +105,6 @@ export default function Airdrop() {
               }}
             />
           </div>
-          <div className="flex flex-row w-[100%] my-4 space-x-5 items-center">
-            <p className="flex w-[100px] font-semibold">Select Network</p>
-            <Select
-              id="network"
-              name="network"
-              label="Network"
-              placeholder="Select your network"
-              options={serviceOptions}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setNetwork(e.target.value)
-              }
-            />
-          </div>
           <div className="flex flex-row w-[100%] mb-4 space-x-5 items-center">
             <p className="flex w-[100px] font-semibold">List of recipient</p>
             <Upload
@@ -153,7 +133,7 @@ export default function Airdrop() {
           </div>
           <div className="flex w-[100%] bg-[#1e1e1e] drop-shadow-lg text-gray-300 md:max-w-[600px] mx-auto p-5 mt-2 justify-center border border-gray-600 rounded-xl">
             {`curl  -X POST \
-  'http://ui78hikf3p9mvbu6hvsi7b2o98.ingress.boxedcloud.net/api/airdrop' \
+  'https://token-xdc.vercel.app/api/airdrop' \
   --header 'Accept: */*' \
   --header 'Content-Type: application/json' \
   --data-raw '{
